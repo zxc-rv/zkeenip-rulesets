@@ -22,27 +22,33 @@ jobs:
 
       - name: Run Go program to fetch and generate output
         run: |
-          go run main.go  -geosite-urls "https://github.com/jameszeroX/zkeen-domains/releases/latest/download/zkeen.dat" -geoip-urls "https://github.com/jameszeroX/zkeen-ip/releases/latest/download/zkeenip.dat" -out output
+          go run main.go -geoip-urls "https://github.com/jameszeroX/zkeen-ip/releases/latest/download/zkeenip.dat" -out output
+
+      - name: Download mihomo & Convert lists to mrs
+        run: |
+          echo "Getting mihomo..."
+          MIHOMO_URL=$(curl -Ls https://api.github.com/repos/MetaCubeX/mihomo/releases/latest | jq -r '.assets[] | select(.name | test("mihomo-linux-amd64-v3-v.*\\.gz$")) | .browser_download_url')
+          curl -sSLf "$MIHOMO_URL" -o mihomo.gz
+          gunzip mihomo.gz
+          chmod +x mihomo
+          
+          echo "Converting files..."
+          for list_file in output/*.list; do
+            [ -e "$list_file" ] || continue
+            mrs_file="${list_file%.list}.mrs"
+            ./mihomo convert-ruleset ipcidr text "$list_file" "$mrs_file"
+          done
 
       - name: Create unique tag from timestamp and commit hash
         id: uniq
         run: |
           echo "id=lists-$(date -u +%Y%m%d-%H%M%S)-${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
 
-      # - name: Create GitHub release
-      #   uses: softprops/action-gh-release@v2
-      #   with:
-      #     tag_name: ${{ steps.uniq.outputs.id }}
-      #     name: Lists ${{ steps.uniq.outputs.id }}
-      #     body: |
-      #       Auto-generated release on ${{ steps.uniq.outputs.id }}.
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload .list files as release assets
+      - name: Upload .list and .mrs files as release assets
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.uniq.outputs.id }}
-          files: output/*.list
+          files: |
+            output/*.mrs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
