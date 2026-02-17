@@ -221,7 +221,7 @@ func processGeoIP(data []byte, outDir string) error {
 	fmt.Printf("Processing GeoIP data with %d entries\n", len(geoipList.Entry))
 
 	for _, geoip := range geoipList.Entry {
-		filename := filepath.Join(outDir, strings.ToLower(geoip.CountryCode)+"_ips.list")
+		filename := filepath.Join(outDir, strings.ToLower(geoip.CountryCode)+"@ipcidr.list")
 		file, err := os.Create(filename)
 		if err != nil {
 			fmt.Printf("Error creating file %s: %v\n", filename, err)
