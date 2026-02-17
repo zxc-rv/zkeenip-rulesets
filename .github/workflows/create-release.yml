@@ -26,15 +26,13 @@ jobs:
 
       - name: Download mihomo & Convert lists to mrs
         run: |
-          echo "Getting mihomo..."
           MIHOMO_URL=$(curl -Ls https://api.github.com/repos/MetaCubeX/mihomo/releases/latest | jq -r '.assets[] | select(.name | test("mihomo-linux-amd64-v3-v.*\\.gz$")) | .browser_download_url')
           curl -sSLf "$MIHOMO_URL" -o mihomo.gz
           gunzip mihomo.gz
           chmod +x mihomo
-          
-          echo "Converting files..."
           for list_file in output/*.list; do
             [ -e "$list_file" ] || continue
+            sed -i 's/^IP-CIDR\(6\)\?,//g' "$list_file"
             mrs_file="${list_file%.list}.mrs"
             ./mihomo convert-ruleset ipcidr text "$list_file" "$mrs_file"
           done
