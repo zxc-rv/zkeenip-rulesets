@@ -38,30 +38,29 @@ rule-providers:
   youtube@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/youtube@ipcidr.mrs }
 
 rules:
-  RULE-SET,akamai@ipcidr,PROXY
-  RULE-SET,amazon@ipcidr,PROXY
-  RULE-SET,arelion@ipcidr,PROXY
-  RULE-SET,azure@ipcidr,PROXY
-  RULE-SET,bunnycdn@ipcidr,PROXY
-  RULE-SET,cdn77@ipcidr,PROXY
-  RULE-SET,cloudflare@ipcidr,PROXY
-  RULE-SET,colocrossing@ipcidr,PROXY
-  RULE-SET,contabo@ipcidr,PROXY
-  RULE-SET,digitalocean@ipcidr,PROXY
-  RULE-SET,fastly@ipcidr,PROXY
-  RULE-SET,frantech@ipcidr,PROXY
-  RULE-SET,gcore@ipcidr,PROXY
-  RULE-SET,google@ipcidr,PROXY
-  RULE-SET,hetzner@ipcidr,PROXY
-  RULE-SET,leaseweb@ipcidr,PROXY
-  RULE-SET,linode@ipcidr,PROXY
-  RULE-SET,liquidweb@ipcidr,PROXY
-  RULE-SET,mega@ipcidr,PROXY
-  RULE-SET,meta@ipcidr,PROXY
-  RULE-SET,oracle@ipcidr,PROXY
-  RULE-SET,ovh@ipcidr,PROXY
-  RULE-SET,scaleway@ipcidr,PROXY
-  RULE-SET,telegram@ipcidr,PROXY
-  RULE-SET,vultr@ipcidr,PROXY
-  RULE-SET,youtube@ipcidr,PROXY
-
+  - RULE-SET,akamai@ipcidr,PROXY
+  - RULE-SET,amazon@ipcidr,PROXY
+  - RULE-SET,arelion@ipcidr,PROXY
+  - RULE-SET,azure@ipcidr,PROXY
+  - RULE-SET,bunnycdn@ipcidr,PROXY
+  - RULE-SET,cdn77@ipcidr,PROXY
+  - RULE-SET,cloudflare@ipcidr,PROXY
+  - RULE-SET,colocrossing@ipcidr,PROXY
+  - RULE-SET,contabo@ipcidr,PROXY
+  - RULE-SET,digitalocean@ipcidr,PROXY
+  - RULE-SET,fastly@ipcidr,PROXY
+  - RULE-SET,frantech@ipcidr,PROXY
+  - RULE-SET,gcore@ipcidr,PROXY
+  - RULE-SET,google@ipcidr,PROXY
+  - RULE-SET,hetzner@ipcidr,PROXY
+  - RULE-SET,leaseweb@ipcidr,PROXY
+  - RULE-SET,linode@ipcidr,PROXY
+  - RULE-SET,liquidweb@ipcidr,PROXY
+  - RULE-SET,mega@ipcidr,PROXY
+  - RULE-SET,meta@ipcidr,PROXY
+  - RULE-SET,oracle@ipcidr,PROXY
+  - RULE-SET,ovh@ipcidr,PROXY
+  - RULE-SET,scaleway@ipcidr,PROXY
+  - RULE-SET,telegram@ipcidr,PROXY
+  - RULE-SET,vultr@ipcidr,PROXY
+  - RULE-SET,youtube@ipcidr,PROXY
