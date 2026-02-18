@@ -64,3 +64,4 @@ rules:
   - RULE-SET,telegram@ipcidr,PROXY
   - RULE-SET,vultr@ipcidr,PROXY
   - RULE-SET,youtube@ipcidr,PROXY
+  - MATCH,DIRECT
