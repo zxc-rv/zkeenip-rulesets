@@ -1,142 +1,66 @@
-# Rule Lists
+# ZKeenIP Rulesets
 
-A Go utility for converting V2Ray DAT files (GeoSite and GeoIP) into rule list files suitable for various proxy and firewall configurations. 
+Списки zkeenip от [JamesZero](https://github.com/jameszeroX/zkeen-ip) в формате mrs для использования с ядром Mihomo.
 
-This repository includes a GitHub Action (`.github/workflows/create-release.yml`) that automatically fetches and processes DAT files [zkeen-domains](https://github.com/jameszeroX/zkeen-domains) and [zkeen-ip](https://github.com/jameszeroX/zkeen-ip) to generate rule lists each week.
-
-## Features
-
-- **GeoSite Support**: Convert domain-based DAT files to rule lists
-- **GeoIP Support**: Convert IP CIDR-based DAT files to rule lists with `_ips` postfix
-- **Multiple File Processing**: Process multiple DAT files in a single command
-- **URL Support**: Download and process DAT files from URLs
-- **Flexible Output**: Customizable output directory
-- **Auto-formatting**: Proper rule formatting for different proxy clients
-
-## Automated Releases
-
-This repository includes a GitHub Action (`.github/workflows/create-release.yml`) that automatically fetches and processes DAT files [zkeen-domains](https://github.com/jameszeroX/zkeen-domains) and [zkeen-ip](https://github.com/jameszeroX/zkeen-ip) to generate rule lists each week.
-
-### How it works
-
-The GitHub Action:
-1. **Runs weekly**: Automatically executes every Sunday at 00:00 UTC
-2. **Manual trigger**: Can also be triggered manually via GitHub's workflow dispatch
-3. **Fetches latest data**: Downloads the latest DAT files from:
-   - [zkeen-domains](https://github.com/jameszeroX/zkeen-domains) for GeoSite data
-   - [zkeen-ip](https://github.com/jameszeroX/zkeen-ip) for GeoIP data
-4. **Generates rule lists**: Processes both files and creates organized rule lists
-5. **Creates releases**: Automatically creates GitHub releases with all generated `.list` files
-
-### Using the automated releases
-
-You can download the latest generated rule lists from the [Releases page](../../releases). Each release contains:
-- Domain rule files (e.g., `google.list`, `cn.list`)
-- IP rule files with `_ips` suffix (e.g., `google_ips.list`, `cn_ips.list`)
+Пример использования:
 
 
+```YAML
+anchors:
+  a1: &ipcidr { type: http, format: mrs, behavior: ipcidr, interval: 86400 }
 
-## Usage
+rule-providers:
+   akamai@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/akamai@ipcidr.mrs }
+   amazon@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/amazon@ipcidr.mrs }
+   arelion@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/arelion@ipcidr.mrs }
+   azure@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/azure@ipcidr.mrs }
+   bunnycdn@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/bunnycdn@ipcidr.mrs }
+   cdn77@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/cdn77@ipcidr.mrs }
+   cloudflare@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/cloudflare@ipcidr.mrs }
+   colocrossing@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/colocrossing@ipcidr.mrs }
+   contabo@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/contabo@ipcidr.mrs }
+   digitalocean@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/digitalocean@ipcidr.mrs }
+   fastly@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/fastly@ipcidr.mrs }
+   frantech@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/frantech@ipcidr.mrs }
+   gcore@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/gcore@ipcidr.mrs }
+   google@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/google@ipcidr.mrs }
+   hetzner@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/hetzner@ipcidr.mrs }
+   leaseweb@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/leaseweb@ipcidr.mrs }
+   linode@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/linode@ipcidr.mrs }
+   liquidweb@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/liquidweb@ipcidr.mrs }
+   mega@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/mega@ipcidr.mrs }
+   meta@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/meta@ipcidr.mrs }
+   oracle@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/oracle@ipcidr.mrs }
+   ovh@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/ovh@ipcidr.mrs }
+   scaleway@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/scaleway@ipcidr.mrs }
+   telegram@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/telegram@ipcidr.mrs }
+   vultr@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/vultr@ipcidr.mrs }
+   youtube@ipcidr: { <<: *ipcidr, url: https://github.com/zxc-rv/zkeenip-rulesets/releases/latest/download/youtube@ipcidr.mrs }
 
-### Single File Processing
-
-#### Process a GeoSite DAT file (domains)
-```bash
-go run main.go -file geosite.dat -type geosite
-```
-
-#### Process a GeoIP DAT file (IP ranges)
-```bash
-go run main.go -file zkeenip.dat -type geoip
-```
-
-#### Process from URL
-```bash
-go run main.go -url https://example.com/geosite.dat -type geosite
-go run main.go -url https://example.com/geoip.dat -type geoip
-```
-
-### Multiple File Processing
-
-#### Process both GeoSite and GeoIP files
-```bash
-go run main.go -geosite geosite.dat -geoip zkeenip.dat
-```
-
-#### Process multiple GeoSite files
-```bash
-go run main.go -geosites "file1.dat,file2.dat,file3.dat"
-```
-
-#### Process multiple GeoIP files
-```bash
-go run main.go -geoips "ip1.dat,ip2.dat,ip3.dat"
-```
-
-#### Process multiple URLs
-```bash
-go run main.go -geosite-urls "https://example.com/site1.dat,https://example.com/site2.dat"
-go run main.go -geoip-urls "https://example.com/ip1.dat,https://example.com/ip2.dat"
-```
-
-#### Combined processing
-```bash
-go run main.go \
-  -geosites "local_sites.dat" \
-  -geoips "local_ips.dat" \
-  -geosite-urls "https://example.com/remote_sites.dat" \
-  -geoip-urls "https://example.com/remote_ips.dat" \
-  -out combined_rules
-```
-
-### Command Line Options
-
-| Flag | Description | Example |
-|------|-------------|---------|
-| `-file` | Path to local .dat file | `-file geosite.dat` |
-| `-url` | URL to fetch .dat file from | `-url https://example.com/file.dat` |
-| `-type` | Type of .dat file: 'geosite' or 'geoip' | `-type geoip` |
-| `-out` | Output directory for files | `-out custom_output` |
-| `-geosite` | Path to single GeoSite .dat file | `-geosite sites.dat` |
-| `-geoip` | Path to single GeoIP .dat file | `-geoip ips.dat` |
-| `-geosites` | Comma-separated paths to GeoSite files | `-geosites "file1.dat,file2.dat"` |
-| `-geoips` | Comma-separated paths to GeoIP files | `-geoips "ip1.dat,ip2.dat"` |
-| `-geosite-urls` | Comma-separated URLs to GeoSite files | `-geosite-urls "url1,url2"` |
-| `-geoip-urls` | Comma-separated URLs to GeoIP files | `-geoip-urls "url1,url2"` |
-
-## Output Format
-
-### GeoSite Files (Domains)
-Output files are named using the country code from the DAT file:
-- `cn.list`
-- `us.list`
-- `google.list`
-
-Content format:
-```
-DOMAIN-SUFFIX,example.com
-DOMAIN-KEYWORD,google
-DOMAIN,exact.domain.com
-DOMAIN-REGEX,.*\.example\.com
-```
-
-### GeoIP Files (IP Ranges)
-Output files are named with `_ips` postfix:
-- `cn_ips.list`
-- `us_ips.list`
-- `google_ips.list`
-
-Content format:
-```
-IP-CIDR,8.8.8.0/24
-IP-CIDR,1.1.1.0/24
-IP-CIDR,192.168.0.0/16
-```
-
-
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-
+rules:
+   RULE-SET,akamai@ipcidr,PROXY
+   RULE-SET,amazon@ipcidr,PROXY
+   RULE-SET,arelion@ipcidr,PROXY
+   RULE-SET,azure@ipcidr,PROXY
+   RULE-SET,bunnycdn@ipcidr,PROXY
+   RULE-SET,cdn77@ipcidr,PROXY
+   RULE-SET,cloudflare@ipcidr,PROXY
+   RULE-SET,colocrossing@ipcidr,PROXY
+   RULE-SET,contabo@ipcidr,PROXY
+   RULE-SET,digitalocean@ipcidr,PROXY
+   RULE-SET,fastly@ipcidr,PROXY
+   RULE-SET,frantech@ipcidr,PROXY
+   RULE-SET,gcore@ipcidr,PROXY
+   RULE-SET,google@ipcidr,PROXY
+   RULE-SET,hetzner@ipcidr,PROXY
+   RULE-SET,leaseweb@ipcidr,PROXY
+   RULE-SET,linode@ipcidr,PROXY
+   RULE-SET,liquidweb@ipcidr,PROXY
+   RULE-SET,mega@ipcidr,PROXY
+   RULE-SET,meta@ipcidr,PROXY
+   RULE-SET,oracle@ipcidr,PROXY
+   RULE-SET,ovh@ipcidr,PROXY
+   RULE-SET,scaleway@ipcidr,PROXY
+   RULE-SET,telegram@ipcidr,PROXY
+   RULE-SET,vultr@ipcidr,PROXY
+   RULE-SET,youtube@ipcidr,PROXY
