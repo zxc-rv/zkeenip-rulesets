@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: '0 0 * * 0'   # Every Sunday at 00:00 UTC
   workflow_dispatch:       # Also allows manual trigger
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   fetch-and-release:
@@ -13,12 +15,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
-          go-version: '1.21'
+          go-version: 'stable'
 
       - name: Run Go program to fetch and generate output
         run: |
